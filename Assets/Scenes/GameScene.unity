@@ -1512,6 +1512,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   items:
   - {fileID: 2514714137856055872, guid: 325f1d1e229fff647ad2b9d87d5c3e35, type: 3}
+  - {fileID: 2407791043734283695, guid: c5251221d93e51841b441b175ac55b18, type: 3}
 --- !u!4 &781195096
 Transform:
   m_ObjectHideFlags: 0

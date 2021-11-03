@@ -12,7 +12,7 @@ public class GameScript : MonoBehaviour
     {
         for (int i=0; i<10; ++i)
         {
-            Instantiate(items[0], new Vector3(i * 2, i * 2, 0), Quaternion.identity);
+            Instantiate(items[1], new Vector3(i * 2, i * 2, 0), Quaternion.identity);
         }
         
     }
