@@ -46,17 +46,25 @@ public class PlayerScript : MonoBehaviour
     void FixedUpdate() 
     {
         controller.Move(hMove * Time.fixedDeltaTime, crouch, jump);
-        if (jump){
+        if (jump)
+        {
             animator.SetBool("IsJumping", true);
         }
         jump = false;
         crouch = false;
     }
 
-    void OnTriggerEnter2D(Collider2D collider) 
+    /*void OnTriggerEnter2D(Collider2D collider) 
     {
-         Debug.Log(collider.tag);
-    }
+         Debug.Log(collider.gameObject.name);
+         
+         if(collider.gameObject.name == "Coin")
+         {
+            Destroy(collider.gameObject);
+         }
+         Destroy(collider.gameObject);
+         
+    }*/
 
     public void OnLanding()
     {
