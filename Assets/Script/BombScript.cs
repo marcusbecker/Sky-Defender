@@ -14,6 +14,10 @@ public class BombScript : MonoBehaviour
 
     private bool isDestroyed = false;
 
+    private bool kickOff = false;
+
+    private float direction = -10f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,6 +32,18 @@ public class BombScript : MonoBehaviour
 
     void FixedUpdate() 
     {
+        if(kickOff)
+        {
+            if(transform.position.x < -40 || transform.position.x > 70)
+            {
+                Destroy(gameObject);
+            }
+            else 
+            {
+                transform.Translate(direction * 2 * Time.fixedDeltaTime, 0, 0, Space.World);
+            }
+        }
+        
         //Time.fixedDeltaTime
         //animator.SetBool("IsJumping", true);
         //Debug.Log(Time.fixedDeltaTime);
@@ -61,12 +77,25 @@ public class BombScript : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collider) 
     {
-         Debug.Log(collider.gameObject.name);
+         //Debug.Log(collider.gameObject.name);
          
          if ("Player" == collider.gameObject.name)
          {
-            Destroy(gameObject);
+            if(isActivated && isDestroyed)
+            {
+                //player damage
+            }
+            else
+            {
+                if((int) transform.position.x > (int) collider.transform.position.x)
+                {
+                    direction = 10f;
+                }
+
+                kickOff = true;
+            }
+
+            //Destroy(gameObject);
          }
-        
-    }       
+    }
 }
