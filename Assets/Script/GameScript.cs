@@ -9,7 +9,7 @@ public class GameScript : MonoBehaviour
 
     public GameObject tileParent;
 
-    private List<GameObject> tiles;
+    private static List<GameObject> tiles;
 
     private bool gamePlay = true;
 
@@ -37,14 +37,27 @@ public class GameScript : MonoBehaviour
         
     }
 
+    public static void destroyTile(GameObject tile)
+    {
+        tiles.Remove(tile);
+        DestroyImmediate(tile.GetComponent("BoxCollider2D"));
+        Rigidbody2D rigid = tile.AddComponent<Rigidbody2D>();
+        rigid.mass = 5;
+        //Destroy(tile);
+    }
+
     IEnumerator createItem()
     {
         while(gamePlay)
         {
             GameObject tile = tiles[Random.Range(0, tiles.Count)];
             Vector3 temp = tile.transform.position;
-            Instantiate(items[Random.Range(0, items.Length)], new Vector3(temp.x, temp.y + 0.98f, 0), Quaternion.identity);            
-            //Debug.Log(tile.name);
+            GameObject item = Instantiate(items[Random.Range(0, items.Length)], new Vector3(temp.x, temp.y + 0.98f, 0), Quaternion.identity);
+            if(item.name.Contains("Bomb"))
+            {
+                item.GetComponent<BombScript>().tile = tile;
+            }
+
             yield return new WaitForSeconds(Random.Range(3, 10));
         }
     }

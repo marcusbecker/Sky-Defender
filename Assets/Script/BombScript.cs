@@ -6,16 +6,12 @@ public class BombScript : MonoBehaviour
 {
     
     public Animator animator;
-    
+    public GameObject tile; 
     public int timer = 100;
     private int counter = 100;
-
     private bool isActivated = false;
-
     private bool isDestroyed = false;
-
     private bool kickOff = false;
-
     private float direction = -10f;
 
     // Start is called before the first frame update
@@ -54,6 +50,7 @@ public class BombScript : MonoBehaviour
             
             if(isActivated && isDestroyed)
             {
+                GameScript.destroyTile(tile);
                 Destroy(gameObject);
                 return;
             }

@@ -6,7 +6,9 @@ public class PlayerScript : MonoBehaviour
 {
     
     public float playerSpeed = 40f;
+    
     public Animator animator;
+    
     public CharacterController2D controller;
     
     private float hMove = 0f;
