@@ -39,37 +39,38 @@ public class BombScript : MonoBehaviour
                 transform.Translate(direction * 2 * Time.fixedDeltaTime, 0, 0, Space.World);
             }
         }
-        
-        //Time.fixedDeltaTime
-        //animator.SetBool("IsJumping", true);
-        //Debug.Log(Time.fixedDeltaTime);
-        timer -= 1;
-
-        if(timer <= 0)
+        else
         {
-            
-            if(isActivated && isDestroyed)
-            {
-                GameScript.destroyTile(tile);
-                Destroy(gameObject);
-                return;
-            }
-            
-            if (!isActivated)
-            {
-                isActivated = true;
-                timer = counter;
-            }
-            else
-            {
-                isDestroyed = true;
-                timer = counter / 2;
-            }
-            
-            animator.SetBool("Active", isActivated);
-            animator.SetBool("Explode", isDestroyed);
-        }
+            //Time.fixedDeltaTime
+            //animator.SetBool("IsJumping", true);
+            //Debug.Log(Time.fixedDeltaTime);
+            timer -= 1;
 
+            if(timer <= 0)
+            {
+
+                if(isActivated && isDestroyed)
+                {
+                    GameScript.destroyTile(tile);
+                    Destroy(gameObject);
+                    return;
+                }
+                
+                if (!isActivated)
+                {
+                    isActivated = true;
+                    timer = counter;
+                }
+                else
+                {
+                    isDestroyed = true;
+                    timer = counter / 2;
+                }
+                
+                animator.SetBool("Active", isActivated);
+                animator.SetBool("Explode", isDestroyed);
+            }
+        }
     }
 
     void OnTriggerEnter2D(Collider2D collider) 

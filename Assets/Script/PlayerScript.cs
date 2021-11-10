@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerScript : MonoBehaviour
 {
@@ -21,7 +22,6 @@ public class PlayerScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
     }
 
     // Update is called once per frame
@@ -38,11 +38,10 @@ public class PlayerScript : MonoBehaviour
         else if (Input.GetButtonDown("Crouch"))
         {
             crouch = true;
-            //GetComponent<BoxCollider2D> ().enabled = false;
-            //GetComponent<CircleCollider2D> ().enabled = false;
+            //GetComponent<BoxCollider2D>().enabled = false;
+            //GetComponent<CircleCollider2D>().enabled = false;
         }
 
-        
     }
 
     void FixedUpdate() 

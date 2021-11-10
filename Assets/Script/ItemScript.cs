@@ -22,6 +22,7 @@ public class ItemScript : MonoBehaviour
          
          if ("Player" == collider.gameObject.name)
          {
+            ++ScoreScript.score;
             Destroy(gameObject);
          }
         
