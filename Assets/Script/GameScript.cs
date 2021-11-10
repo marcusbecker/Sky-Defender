@@ -11,6 +11,10 @@ public class GameScript : MonoBehaviour
     public GameObject player;
     public GameObject[] items;
 
+    public GameObject[] spawItems;
+
+    public char[] spawItemsType;
+
     public GameObject tileParent;
 
     private static List<GameObject> tiles;
@@ -78,6 +82,14 @@ public class GameScript : MonoBehaviour
                     count = 10;
                     --maxTime;
                 }
+            }
+
+            int spawId = Random.Range(0, spawItems.Length);
+            // check if it will be spawed in horizontal or vertial
+            if('h' == spawItemsType[spawId])
+            {
+                bool left = Random.Range(0, 2) == 0;
+                GameObject spaw = Instantiate(spawItems[spawId], new Vector3(left ? -15 : 15, Random.Range(-4, 4), 0), left ? Quaternion.Euler(0, 180, 0) : Quaternion.identity);
             }
 
             GameObject tile = tiles[Random.Range(0, tiles.Count)];

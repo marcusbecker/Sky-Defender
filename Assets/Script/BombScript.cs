@@ -81,7 +81,7 @@ public class BombScript : MonoBehaviour
          {
             if(isActivated && isDestroyed)
             {
-                //player damage
+               collider.GetComponent<PlayerScript>().takeDamage();
             }
             else
             {

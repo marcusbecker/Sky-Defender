@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ItemScript : MonoBehaviour
 {
+    public int points;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,11 +19,10 @@ public class ItemScript : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collider) 
     {
-         Debug.Log(collider.gameObject.name);
-         
+
          if ("Player" == collider.gameObject.name)
          {
-            ++ScoreScript.score;
+            ScoreScript.score += points;
             Destroy(gameObject);
          }
         

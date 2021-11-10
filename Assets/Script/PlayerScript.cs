@@ -15,9 +15,10 @@ public class PlayerScript : MonoBehaviour
     private float hMove = 0f;
 
     private bool jump = false;
-    private bool crouch = false;
 
     private bool inAir = false;
+
+    private bool crouch = false;
 
     // Start is called before the first frame update
     void Start()
@@ -35,22 +36,17 @@ public class PlayerScript : MonoBehaviour
             jump = true;
             animator.SetBool("IsJumping", true);
         } 
-        else if (Input.GetButtonDown("Crouch"))
-        {
-            crouch = true;
-            //GetComponent<BoxCollider2D>().enabled = false;
-            //GetComponent<CircleCollider2D>().enabled = false;
-        }
-
     }
 
     void FixedUpdate() 
     {
         controller.Move(hMove * Time.fixedDeltaTime, crouch, jump);
+        
         if (jump)
         {
             animator.SetBool("IsJumping", true);
         }
+
         jump = false;
         crouch = false;
     }
@@ -66,6 +62,12 @@ public class PlayerScript : MonoBehaviour
          Destroy(collider.gameObject);
          
     }*/
+
+    public void takeDamage()
+    {
+        animator.SetBool("IsHurt", true);
+        animator.SetBool("IsJumping", false);
+    }
 
     public void OnLanding()
     {
