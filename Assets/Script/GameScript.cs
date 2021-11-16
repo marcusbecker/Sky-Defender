@@ -8,6 +8,8 @@ using UnityEngine.SceneManagement;
 public class GameScript : MonoBehaviour
 {
     
+    public static bool gameOver = false;
+    
     public GameObject player;
     public GameObject[] items;
 
@@ -48,7 +50,7 @@ public class GameScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(player.transform.position.y < -30)
+        if(player.transform.position.y < -30 || GameScript.gameOver)
         {
             gamePlay = false;
             gameOverText.gameObject.SetActive(true);
@@ -84,12 +86,15 @@ public class GameScript : MonoBehaviour
                 }
             }
 
-            int spawId = Random.Range(0, spawItems.Length);
-            // check if it will be spawed in horizontal or vertial
-            if('h' == spawItemsType[spawId])
+            if(Random.Range(0, 5) > 3)
             {
-                bool left = Random.Range(0, 2) == 0;
-                GameObject spaw = Instantiate(spawItems[spawId], new Vector3(left ? -15 : 15, Random.Range(-4, 4), 0), left ? Quaternion.Euler(0, 180, 0) : Quaternion.identity);
+                int spawId = Random.Range(0, spawItems.Length);
+                // check if it will be spawed in horizontal or vertial
+                if('h' == spawItemsType[spawId])
+                {
+                    bool left = Random.Range(0, 2) == 0;
+                    GameObject spaw = Instantiate(spawItems[spawId], new Vector3(left ? -15 : 15, Random.Range(-4, 4), 0), left ? Quaternion.Euler(0, 180, 0) : Quaternion.identity);
+                }
             }
 
             GameObject tile = tiles[Random.Range(0, tiles.Count)];

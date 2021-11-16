@@ -38,6 +38,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Enemy
+    uniqueID: 4062353169
+    locked: 0
   - name: Background
     uniqueID: 331364229
     locked: 0
@@ -49,4 +52,7 @@ TagManager:
     locked: 0
   - name: Foreground
     uniqueID: 3012782373
+    locked: 0
+  - name: Tiles
+    uniqueID: 2775914415
     locked: 0

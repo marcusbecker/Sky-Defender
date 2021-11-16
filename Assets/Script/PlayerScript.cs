@@ -20,6 +20,10 @@ public class PlayerScript : MonoBehaviour
 
     private bool crouch = false;
 
+    private int life = 3;
+
+    private float invulnerable = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -35,7 +39,12 @@ public class PlayerScript : MonoBehaviour
         {
             jump = true;
             animator.SetBool("IsJumping", true);
-        } 
+        }
+
+        if(invulnerable > 0)
+        {
+            invulnerable -= 1 * Time.fixedDeltaTime;
+        }
     }
 
     void FixedUpdate() 
@@ -65,8 +74,24 @@ public class PlayerScript : MonoBehaviour
 
     public void takeDamage()
     {
+        
+        if(invulnerable > 0)
+        {
+            return;
+        }
+
+        invulnerable = 1.5f;
         animator.SetBool("IsHurt", true);
         animator.SetBool("IsJumping", false);
+        
+        GameObject heart = GameObject.Find("life0" + life);
+        heart.SetActive(false);
+        --life;
+
+        if(life == 0)
+        {
+            GameScript.gameOver = true;
+        }
     }
 
     public void OnLanding()
