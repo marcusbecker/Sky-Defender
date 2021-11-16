@@ -27,6 +27,15 @@ public class PlayerScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        life = 3;
+        invulnerable = 0;
+
+
+        for (int i = 0; i < 3; ++i)
+        {
+            GameObject heart = GameObject.Find("life0" + (i + 1));
+            heart.SetActive(true);            
+        }
     }
 
     // Update is called once per frame
@@ -49,15 +58,23 @@ public class PlayerScript : MonoBehaviour
 
     void FixedUpdate() 
     {
-        controller.Move(hMove * Time.fixedDeltaTime, crouch, jump);
-        
-        if (jump)
+        if(GameScript.gameOver)
         {
-            animator.SetBool("IsJumping", true);
+            animator.SetBool("IsHurt", true);
+            transform.Translate(0, -1 * Time.deltaTime / 2, 0, Space.World);
         }
+        else
+        {
+            controller.Move(hMove * Time.fixedDeltaTime, crouch, jump);
+            
+            if (jump)
+            {
+                animator.SetBool("IsJumping", true);
+            }
 
-        jump = false;
-        crouch = false;
+            jump = false;
+            crouch = false;
+        }
     }
 
     /*void OnTriggerEnter2D(Collider2D collider) 

@@ -43,6 +43,10 @@ public class GameScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        gameOver = false;
+        count = 10;
+        maxTime = 10;
+
         StartCoroutine(createItem());
         gameOverText.gameObject.SetActive(false);
     }
