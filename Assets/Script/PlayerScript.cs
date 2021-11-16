@@ -5,13 +5,7 @@ using UnityEngine.UI;
 
 public class PlayerScript : MonoBehaviour
 {
-    
-    public float playerSpeed = 40f;
-    
-    public Animator animator;
-    
-    public CharacterController2D controller;
-    
+
     private float hMove = 0f;
 
     private bool jump = false;
@@ -24,17 +18,22 @@ public class PlayerScript : MonoBehaviour
 
     private float invulnerable = 0;
 
+    public float playerSpeed = 40f;
+    
+    public Animator animator;
+    
+    public CharacterController2D controller;
+
     // Start is called before the first frame update
     void Start()
     {
         life = 3;
         invulnerable = 0;
 
-
-        for (int i = 0; i < 3; ++i)
+        for (int i = 1; i < 4; ++i)
         {
-            GameObject heart = GameObject.Find("life0" + (i + 1));
-            heart.SetActive(true);            
+            GameObject heart = GameObject.Find("life0" + i);
+            heart.SetActive(true);
         }
     }
 
