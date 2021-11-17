@@ -5,10 +5,10 @@ using UnityEngine;
 public class ItemScript : MonoBehaviour
 {
     public int points;
+
     // Start is called before the first frame update
     void Start()
     {
-        
     }
 
     // Update is called once per frame
@@ -22,7 +22,7 @@ public class ItemScript : MonoBehaviour
 
          if ("Player" == collider.gameObject.name)
          {
-            ScoreScript.score += points;
+            collider.GetComponent<PlayerScript>().getItem(points);
             Destroy(gameObject);
          }
         

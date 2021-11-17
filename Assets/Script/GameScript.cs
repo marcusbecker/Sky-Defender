@@ -7,10 +7,15 @@ using UnityEngine.SceneManagement;
 
 public class GameScript : MonoBehaviour
 {
+
+    private bool gamePlay = true;
     
+    private static List<GameObject> tiles;
+
     public static bool gameOver = false;
     
     public GameObject player;
+
     public GameObject[] items;
 
     public GameObject[] spawItems;
@@ -19,14 +24,13 @@ public class GameScript : MonoBehaviour
 
     public GameObject tileParent;
 
-    private static List<GameObject> tiles;
-
-    private bool gamePlay = true;
-
     public int count = 10;
+
     public int maxTime = 10;
 
     public Text gameOverText;
+
+    public AudioSource music;
 
     void Awake()
     {
@@ -46,7 +50,7 @@ public class GameScript : MonoBehaviour
         gameOver = false;
         count = 10;
         maxTime = 10;
-
+        music.Play(0);
         StartCoroutine(createItem());
         gameOverText.gameObject.SetActive(false);
     }
@@ -57,6 +61,7 @@ public class GameScript : MonoBehaviour
         if(player.transform.position.y < -30 || GameScript.gameOver)
         {
             gamePlay = false;
+            music.Stop();
             gameOverText.gameObject.SetActive(true);
         }
 

@@ -24,6 +24,14 @@ public class PlayerScript : MonoBehaviour
     
     public CharacterController2D controller;
 
+    public AudioSource jumpSound;
+
+    public AudioSource hurtSound;
+
+    public AudioSource itemSound;
+
+    public AudioSource kickSound;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -47,6 +55,7 @@ public class PlayerScript : MonoBehaviour
         {
             jump = true;
             animator.SetBool("IsJumping", true);
+            jumpSound.Play(0);
         }
 
         if(invulnerable > 0)
@@ -88,6 +97,17 @@ public class PlayerScript : MonoBehaviour
          
     }*/
 
+    public void kickBomb()
+    {
+        kickSound.Play(0);
+    }
+
+    public void getItem(int points)
+    {
+        itemSound.Play(0);
+        ScoreScript.score += points;
+    }
+
     public void takeDamage()
     {
         
@@ -99,6 +119,7 @@ public class PlayerScript : MonoBehaviour
         invulnerable = 1.5f;
         animator.SetBool("IsHurt", true);
         animator.SetBool("IsJumping", false);
+        hurtSound.Play(0);
         
         GameObject heart = GameObject.Find("life0" + life);
         heart.SetActive(false);

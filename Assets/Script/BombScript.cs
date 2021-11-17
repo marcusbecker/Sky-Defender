@@ -5,19 +5,28 @@ using UnityEngine;
 public class BombScript : MonoBehaviour
 {
     
-    public Animator animator;
-    public GameObject tile; 
-    public int timer = 100;
     private int counter = 100;
+    
     private bool isActivated = false;
+    
     private bool isDestroyed = false;
+    
     private bool kickOff = false;
+    
     private float direction = -10f;
+
+    public Animator animator;
+    
+    public GameObject tile; 
+    
+    public int timer = 100;
+
+    private AudioSource sound;    
 
     // Start is called before the first frame update
     void Start()
     {
-
+        sound = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -65,6 +74,7 @@ public class BombScript : MonoBehaviour
                 {
                     isDestroyed = true;
                     timer = counter / 2;
+                    sound.Play(0);
                 }
                 
                 animator.SetBool("Active", isActivated);
@@ -91,6 +101,7 @@ public class BombScript : MonoBehaviour
                 }
 
                 kickOff = true;
+                collider.GetComponent<PlayerScript>().kickBomb();
             }
 
             //Destroy(gameObject);
