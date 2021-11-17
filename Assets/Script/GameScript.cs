@@ -31,6 +31,8 @@ public class GameScript : MonoBehaviour
     public Text gameOverText;
 
     public AudioSource music;
+    
+    public AudioSource endGameMusic;
 
     void Awake()
     {
@@ -48,6 +50,7 @@ public class GameScript : MonoBehaviour
     void Start()
     {
         gameOver = false;
+        gamePlay = true;
         count = 10;
         maxTime = 10;
         music.Play(0);
@@ -60,9 +63,7 @@ public class GameScript : MonoBehaviour
     {
         if(player.transform.position.y < -30 || GameScript.gameOver)
         {
-            gamePlay = false;
-            music.Stop();
-            gameOverText.gameObject.SetActive(true);
+            endGame();
         }
 
         if(!gamePlay)
@@ -70,6 +71,17 @@ public class GameScript : MonoBehaviour
             if (Input.GetButtonDown("Jump")) {
                 SceneManager.LoadScene("IntroScene");
             }
+        }
+    }
+
+    private void endGame()
+    {
+        if(gamePlay)
+        {
+            gamePlay = false;
+            music.Stop();
+            endGameMusic.Play(0);
+            gameOverText.gameObject.SetActive(true);
         }
     }
 
