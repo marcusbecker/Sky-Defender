@@ -20,7 +20,7 @@ public class OpossumScript : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collider) 
     {
-         if ("Player" == collider.gameObject.name)
+         if ("Player" == collider.gameObject.tag)
          {
             collider.GetComponent<PlayerScript>().takeDamage();
          }

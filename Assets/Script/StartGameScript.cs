@@ -8,7 +8,7 @@ public class StartGameScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Jump")) {
+        if (Input.GetButtonDown("Jump1") || Input.GetButtonDown("Jump2")) {
             SceneManager.LoadScene("GameScene");
         }        
     }

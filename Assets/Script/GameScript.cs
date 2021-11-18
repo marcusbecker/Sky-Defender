@@ -56,9 +56,6 @@ public class GameScript : MonoBehaviour
         music.Play(0);
         StartCoroutine(createItem());
         gameOverText.gameObject.SetActive(false);
-
-        Debug.Log("w " + Screen.width);
-        Debug.Log("h " + Screen.height);
     }
 
     // Update is called once per frame
@@ -71,7 +68,7 @@ public class GameScript : MonoBehaviour
 
         if(!gamePlay)
         {
-            if (Input.GetButtonDown("Jump")) {
+            if (Input.GetButtonDown("Jump1") || Input.GetButtonDown("Jump2")) {
                 SceneManager.LoadScene("IntroScene");
             }
         }

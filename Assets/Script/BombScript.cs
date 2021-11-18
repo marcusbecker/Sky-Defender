@@ -87,7 +87,7 @@ public class BombScript : MonoBehaviour
     {
          //Debug.Log(collider.gameObject.name);
          
-         if ("Player" == collider.gameObject.name)
+         if ("Player" == collider.gameObject.tag)
          {
             if(isActivated && isDestroyed)
             {

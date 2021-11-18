@@ -32,6 +32,8 @@ public class PlayerScript : MonoBehaviour
 
     public AudioSource kickSound;
 
+    public int playerId = 1;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -48,15 +50,16 @@ public class PlayerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        hMove = Input.GetAxisRaw("Horizontal") * playerSpeed;
-        animator.SetFloat("Speed", Mathf.Abs(hMove));
-
-        if (Input.GetButtonDown("Jump"))
+        
+        hMove = Input.GetAxisRaw("Horizontal" + playerId) * playerSpeed;
+        if (Input.GetButtonDown("Jump" + playerId))
         {
             jump = true;
             animator.SetBool("IsJumping", true);
             jumpSound.Play(0);
         }
+
+        animator.SetFloat("Speed", Mathf.Abs(hMove));
 
         if(invulnerable > 0)
         {
@@ -110,7 +113,6 @@ public class PlayerScript : MonoBehaviour
 
     public void takeDamage()
     {
-        
         if(invulnerable > 0)
         {
             return;
