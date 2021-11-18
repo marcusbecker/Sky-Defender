@@ -34,6 +34,8 @@ public class PlayerScript : MonoBehaviour
 
     public int playerId = 1;
 
+    private string heartPath = "/Player{0}/Lifes/life0{1}";
+
     // Start is called before the first frame update
     void Start()
     {
@@ -42,7 +44,7 @@ public class PlayerScript : MonoBehaviour
 
         for (int i = 1; i < 4; ++i)
         {
-            GameObject heart = GameObject.Find("life0" + i);
+            GameObject heart = GameObject.Find(string.Format(heartPath, playerId, life));
             heart.SetActive(true);
         }
     }
@@ -88,18 +90,6 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
-    /*void OnTriggerEnter2D(Collider2D collider) 
-    {
-         Debug.Log(collider.gameObject.name);
-         
-         if(collider.gameObject.name == "Coin")
-         {
-            Destroy(collider.gameObject);
-         }
-         Destroy(collider.gameObject);
-         
-    }*/
-
     public void kickBomb()
     {
         kickSound.Play(0);
@@ -122,8 +112,7 @@ public class PlayerScript : MonoBehaviour
         animator.SetBool("IsHurt", true);
         animator.SetBool("IsJumping", false);
         hurtSound.Play(0);
-        
-        GameObject heart = GameObject.Find("life0" + life);
+        GameObject heart = GameObject.Find(string.Format(heartPath, playerId, life));
         heart.SetActive(false);
         --life;
 
