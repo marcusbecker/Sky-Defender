@@ -14,8 +14,6 @@ public class GameScript : MonoBehaviour
 
     public static bool gameOver = false;
     
-    public GameObject player;
-
     public GameObject[] items;
 
     public GameObject[] spawItems;
@@ -29,6 +27,8 @@ public class GameScript : MonoBehaviour
     public int maxTime = 10;
 
     public Text gameOverText;
+
+    public Text winnerText;
 
     public AudioSource music;
     
@@ -56,12 +56,13 @@ public class GameScript : MonoBehaviour
         music.Play(0);
         StartCoroutine(createItem());
         gameOverText.gameObject.SetActive(false);
+        winnerText.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(player.transform.position.y < -30 || GameScript.gameOver)
+        if(GameScript.gameOver)
         {
             endGame();
         }
@@ -82,6 +83,9 @@ public class GameScript : MonoBehaviour
             music.Stop();
             endGameMusic.Play(0);
             gameOverText.gameObject.SetActive(true);
+
+            winnerText.text = ScoreScript.getWinner();
+            winnerText.gameObject.SetActive(true);
         }
     }
 

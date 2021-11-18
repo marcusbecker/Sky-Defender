@@ -17,11 +17,13 @@ public class BombScript : MonoBehaviour
 
     public Animator animator;
     
-    public GameObject tile; 
+    public GameObject tile;
     
     public int timer = 100;
 
-    private AudioSource sound;    
+    private AudioSource sound;
+
+    private GameObject kicker;
 
     // Start is called before the first frame update
     void Start()
@@ -50,14 +52,10 @@ public class BombScript : MonoBehaviour
         }
         else
         {
-            //Time.fixedDeltaTime
-            //animator.SetBool("IsJumping", true);
-            //Debug.Log(Time.fixedDeltaTime);
             timer -= 1;
 
             if(timer <= 0)
             {
-
                 if(isActivated && isDestroyed)
                 {
                     GameScript.destroyTile(tile);
@@ -85,15 +83,16 @@ public class BombScript : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collider) 
     {
-         //Debug.Log(collider.gameObject.name);
-         
          if ("Player" == collider.gameObject.tag)
          {
-            if(isActivated && isDestroyed)
+            
+            GameObject other = collider.gameObject;
+
+            if((isActivated && isDestroyed) || (kickOff && other != kicker))
             {
                collider.GetComponent<PlayerScript>().takeDamage();
             }
-            else
+            else if(!kickOff)
             {
                 if((int) transform.position.x > (int) collider.transform.position.x)
                 {
@@ -101,10 +100,9 @@ public class BombScript : MonoBehaviour
                 }
 
                 kickOff = true;
+                kicker = other;
                 collider.GetComponent<PlayerScript>().kickBomb();
             }
-
-            //Destroy(gameObject);
          }
     }
 }

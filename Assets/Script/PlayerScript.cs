@@ -53,6 +53,11 @@ public class PlayerScript : MonoBehaviour
     void Update()
     {
         
+        if(GameScript.gameOver)
+        {
+            return;
+        }
+        
         hMove = Input.GetAxisRaw("Horizontal" + playerId) * playerSpeed;
         if (Input.GetButtonDown("Jump" + playerId))
         {
@@ -66,6 +71,16 @@ public class PlayerScript : MonoBehaviour
         if(invulnerable > 0)
         {
             invulnerable -= 1 * Time.fixedDeltaTime;
+        }
+
+        if(transform.position.y < -20)
+        {
+            if(ScoreScript.score[playerId - 1] > 0)
+            {
+                ScoreScript.score[playerId - 1] -= ScoreScript.score[playerId - 1] / 2;
+            }
+            
+            GameScript.gameOver = true;
         }
     }
 
@@ -98,7 +113,7 @@ public class PlayerScript : MonoBehaviour
     public void getItem(int points)
     {
         itemSound.Play(0);
-        ScoreScript.score += points;
+        ScoreScript.score[playerId - 1] += points;
     }
 
     public void takeDamage()
@@ -114,8 +129,9 @@ public class PlayerScript : MonoBehaviour
         hurtSound.Play(0);
         GameObject heart = GameObject.Find(string.Format(heartPath, playerId, life));
         heart.SetActive(false);
-        --life;
+        ScoreScript.score[playerId - 1] -= 5;
 
+        --life;
         if(life == 0)
         {
             GameScript.gameOver = true;

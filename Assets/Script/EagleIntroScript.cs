@@ -28,9 +28,6 @@ public class EagleIntroScript : MonoBehaviour
         if(transform.position.x < -20 || transform.position.x > 20)
         {
             left = !left;
-            /*Vector3 flip = transform.localScale;
-            flip.x *= -1;
-            gameObject.transform.localScale = flip;*/
             transform.Rotate(new Vector3(0, 180, 0));
         }
     }
