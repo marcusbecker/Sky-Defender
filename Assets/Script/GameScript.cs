@@ -56,6 +56,9 @@ public class GameScript : MonoBehaviour
         music.Play(0);
         StartCoroutine(createItem());
         gameOverText.gameObject.SetActive(false);
+
+        Debug.Log("w " + Screen.width);
+        Debug.Log("h " + Screen.height);
     }
 
     // Update is called once per frame
