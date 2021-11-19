@@ -19,6 +19,12 @@ public class ScoreScript : MonoBehaviour
         return "Tie!";
     }
 
+    public static void reset()
+    {
+         ScoreScript.score[0] = 0;
+         ScoreScript.score[1] = 0;
+    }
+
     Text scoreText;
     // Start is called before the first frame update
     void Start()

@@ -57,6 +57,7 @@ public class GameScript : MonoBehaviour
         StartCoroutine(createItem());
         gameOverText.gameObject.SetActive(false);
         winnerText.gameObject.SetActive(false);
+        ScoreScript.reset();
     }
 
     // Update is called once per frame
